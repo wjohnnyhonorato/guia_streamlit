@@ -1,0 +1,52 @@
+basico venv local windows
+
+1. Instalar virtualenv (via pip install)
+	1. pip list no cmd (windows + R, cmd) verifica todas as libs instaladas no ambiente atual
+	2. verificar a existencia da lib python virtualenv na lista
+	3. se não existir, pip install virtualenv
+
+2. Apoio verificão python no sistema
+	1. no cmd, comando where python, mostra versões existentes do python (instalações e venv python) no sistema (se certifica qual python está usando)
+	2. para saber qual pyhton está usando, digitar python no CMD, exit() no cmd para sair do python
+
+3. Criar pasta local do projeto e virtual env
+	1. entrar na pasta no cmd: windows + r, cmd, cd + (caminho completo da pasta desejada)
+	2. no cmd, pasta do projeto: python -m venv NOMEVENV
+
+4. Ativar/entrar na virtualenv
+	1. no cmd, pasta do projeto: NOMEVENV\Scripts\Activate.bat
+	2. dentro da venv: pip list, mostra lista de libs dentro da venv (precisa estar vazia)
+
+5. Instalação de libs do projeto na venv
+	1. garantir que o pip esta atualizado: python -m pip install --upgrade pip
+	2. criar o arquivo requirements.txt com as libs necessarias para o projeto, salvar dentro na pasta do projeto no windows
+	    requirements modelo:
+	    liba == version
+	    libb == version
+	2. no cmd, dentro da venv: pip install -r requirements.txt (instala as libs do projeto que vai rodar na venv)
+	
+6. Desativar venv
+	1. no cmd: deactivate (epenas desativa)
+	2. deletar venv: deletar a pasta da venv com todo conteudo
+	
+7. Construção da aplicação streamlit local
+	1. criar APP_STREAMLIT.py com o desenvolvimento do app, colocar na pasta do projeto 
+		(venv já deve ter instalado na venv as libs necessarias requirements.txt)
+		(Esse .py deve importar o modelo de ML treinado (PKL))
+	2. o modelo treinado deve estar salva na pasta do projeto
+	3. no cmd, cd pasta do projeto, ativa venv, dentro da venv: streamlit run APP_STREAMLIT.py
+	4. será aberto no browser local a aplicação
+	
+8. Deploy aplicação streamlit Cloud
+	1. criar um repositorio publico no github para o projeto, com aqruivo readme
+	2. realizar o push e commit de todos os arquivos do projeto (requirements.txt, .py, pkl, etc) menos aruivos na pasta da venv
+	3. Se cadastrar na pagina do streamlit cloud e conectar a conta do github
+	4. logar no streamlit.io > new app
+	5. informar na tabela o endereço github do repositorio do projeto, branch = main e o nome do arquivo .py com o app
+	6. botão deploy, aguardar build, pode levar varios minutos, app é carregado ao fim.
+
+9. Operação e monitoramento
+        1. na pagina share.streamlit.io é possivel ver a lista de app em produção
+	2. é disponivel ver statiticas de acesso, reboot da aplicação, deletar e settings
+	3. em settings é possivel mudar permissões de viz e configurar variaveis de ambiente ou chaves de acesso necessarias para a aplicação
+
